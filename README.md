@@ -5,5 +5,6 @@ react-native开发
 
 适配ios/android两端
 
-npm install
+npm install  
+
 react-native run-ios / react-native run-android  
