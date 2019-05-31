@@ -22,14 +22,18 @@ export default class App extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>哈哈哈😄</Text>
+        <Text style={styles.instructions}>哈哈哈1😄</Text>
         <Text style={styles.instructions}>{instructions}</Text>
         <Button
-          onPress={() => { console.warn('asdasd'); }}
+          onPress={this.testHandler}
           title="Solid Button"
         />
       </View>
     );
+  }
+
+  testHandler = () => {
+    console.log('asdasd');
   }
 }
 
