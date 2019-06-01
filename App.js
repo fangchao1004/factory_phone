@@ -7,51 +7,28 @@
  */
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
-import { Button } from 'react-native-elements';
+import { createStackNavigator, createAppContainer } from "react-navigation"
+import LoginView from './src/login/LoginView';
+import MainView from './src/main/MainView'
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+const AppNavigator = createStackNavigator({
+  LoginView: { screen: LoginView },
+  MainView: { screen: MainView },
+},
+  {//定义配置
+    initialRouteName: 'LoginView',     //设置初始路由为Home
+    mode: 'card', // 页面切换模式, 左右是card(相当于iOS中的push效果), 上下是modal(相当于iOS中的modal效果)
+    headerMode: 'none', // 导航栏的显示模式, screen: 有渐变透明效果, float: 无透明效果, none: 隐藏导航栏,隐藏所有导航
+    onTransitionStart: () => { },  // 回调
+    onTransitionEnd: () => { }  // 回调
+  });
+const AppContainer = createAppContainer(AppNavigator);
 
 export default class App extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>哈哈哈1😄</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-        <Button
-          onPress={this.testHandler}
-          title="Solid Button"
-        />
-      </View>
+      <AppContainer />
     );
-  }
-
-  testHandler = () => {
-    console.log('asdasd');
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
