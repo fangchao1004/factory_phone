@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native'
 import { Button } from 'react-native-elements';
 import { NavigationActions, StackActions } from "react-navigation"
+import DeviceStorage, { USER_INFO } from '../util/DeviceStorage'
 
 const resetAction = StackActions.reset({
     index: 0,
@@ -27,6 +28,7 @@ class SelfView extends Component {
         );
     }
     logoutHandler = () => {
+        DeviceStorage.delete(USER_INFO);
         this.props.navigation.dispatch(resetAction);
     }
 }
