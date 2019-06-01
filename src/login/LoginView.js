@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native'
 import { Button } from 'react-native-elements';
+import { NavigationActions, StackActions } from "react-navigation"
+
+const resetAction = StackActions.reset({
+    index: 0,
+    actions: [
+        NavigationActions.navigate({ routeName: 'MainView' })
+    ]
+});
 
 class LoginView extends Component {
     render() {
@@ -12,7 +20,7 @@ class LoginView extends Component {
                         <Button
                             buttonStyle={{ width: 100 }}
                             containerStyle={{ width: 100 }}
-                            title='123'
+                            title='登录'
                             type="solid"
                             raised
                             onPress={this.loginHandler}
@@ -23,7 +31,7 @@ class LoginView extends Component {
         );
     }
     loginHandler = () => {
-        this.props.navigation.navigate('MainView')
+        this.props.navigation.dispatch(resetAction);
     }
 }
 
