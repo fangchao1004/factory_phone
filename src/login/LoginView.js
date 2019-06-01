@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native'
 import { Button } from 'react-native-elements';
 import { NavigationActions, StackActions } from "react-navigation"
 import HttpApi from '../util/HttpApi'
+import DeviceStorage, { USER_INFO } from '../util/DeviceStorage'
 
 const resetAction = StackActions.reset({
     index: 0,
@@ -33,12 +34,17 @@ class LoginView extends Component {
     }
     loginHandler = () => {
         console.log('点击登录');
-        // this.props.navigation.dispatch(resetAction);
-        // HttpApi.loginByUserInfo({username:'15555105983',password:'123456'},(res)=>{
-        //     console.log(res.data.data);
-        // })
-        HttpApi.getAreaInfo({},(res)=>{
-            console.log(res.data.data);
+        HttpApi.loginByUserInfo({ username: '15555105983', password: '123456' }, (res) => {
+            if (res.data.code === 0) {
+                this.props.navigation.dispatch(resetAction);
+                console.log('登录数据：', res.data.data[0]);
+                DeviceStorage.save(USER_INFO, res.data.data[0]);
+                setTimeout(() => {
+                    DeviceStorage.get(USER_INFO).then((val) => {
+                        console.log("获取：", val);
+                    })
+                }, 1000);
+            }
         })
     }
 }
