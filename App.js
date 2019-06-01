@@ -11,6 +11,7 @@ import { createStackNavigator, createAppContainer } from "react-navigation"
 import LoginView from './src/login/LoginView';
 import MainView from './src/main/MainView'
 
+GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest ///在chrome浏览器中调试 Network可以看见自身的http请求
 const AppNavigator = createStackNavigator({
   LoginView: { screen: LoginView },
   MainView: { screen: MainView },

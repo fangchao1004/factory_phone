@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native'
 import { Button } from 'react-native-elements';
 import { NavigationActions, StackActions } from "react-navigation"
+import HttpApi from '../util/HttpApi'
 
 const resetAction = StackActions.reset({
     index: 0,
@@ -31,7 +32,14 @@ class LoginView extends Component {
         );
     }
     loginHandler = () => {
-        this.props.navigation.dispatch(resetAction);
+        console.log('点击登录');
+        // this.props.navigation.dispatch(resetAction);
+        // HttpApi.loginByUserInfo({username:'15555105983',password:'123456'},(res)=>{
+        //     console.log(res.data.data);
+        // })
+        HttpApi.getAreaInfo({},(res)=>{
+            console.log(res.data.data);
+        })
     }
 }
 
